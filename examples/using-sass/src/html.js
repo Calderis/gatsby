@@ -6,9 +6,10 @@ import { TypographyStyle } from "react-typography"
 const typography = new Typography()
 
 let stylesStr
+const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
 if (process.env.NODE_ENV === `production`) {
   try {
-    stylesStr = require(`!raw-loader!../${process.env.GATSBY_OUTPUT_DIR}/styles.css`)
+    stylesStr = require(`!raw-loader!../${outputDirectory}/styles.css`)
   } catch (e) {
     console.log(e)
   }

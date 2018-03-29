@@ -14,7 +14,7 @@ exports.createPages = ({ boundActionCreators }) => {
 }
 
 exports.onPostBuild = (args, pluginOptions) => {
-  const rootDir = process.env.GATSBY_OUTPUT_DIR
+  const rootDir = process.env.GATSBY_OUTPUT_DIR || `public`
 
   const options = {
     staticFileGlobs: [
@@ -56,5 +56,5 @@ exports.onPostBuild = (args, pluginOptions) => {
 
   const combinedOptions = _.defaults(pluginOptions, options)
 
-  return precache.write(`${process.env.GATSBY_OUTPUT_DIR}/sw.js`, combinedOptions)
+  return precache.write(`${rootDir}/sw.js`, combinedOptions)
 }

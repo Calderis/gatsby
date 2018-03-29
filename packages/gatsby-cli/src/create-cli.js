@@ -104,7 +104,8 @@ function buildLocalCommands(cli, isLocalSite) {
           type: `boolean`,
           describe: `Use HTTPS. See https://www.gatsbyjs.org/docs/local-https/ for an initial setup guide`,
         })
-        .option(`output`, {
+        .option(`d`, {
+          alias: `directory`,
           type: `string`,
           default: `public`,
           describe: `Set output directory. Defaults to public`,
@@ -112,7 +113,7 @@ function buildLocalCommands(cli, isLocalSite) {
     handler: handlerP(
       getCommandHandler(`develop`, (args, cmd) => {
         process.env.NODE_ENV = process.env.NODE_ENV || `development`
-        process.env.GATSBY_OUTPUT_DIR = args.output || `public`
+        process.env.GATSBY_OUTPUT_DIR = args.directory || `public`
         cmd(args)
         // Return an empty promise to prevent handlerP from exiting early.
         // The development server shouldn't ever exit until the user directly
@@ -142,7 +143,7 @@ function buildLocalCommands(cli, isLocalSite) {
     handler: handlerP(
       getCommandHandler(`build`, (args, cmd) => {
         process.env.NODE_ENV = `production`
-        process.env.GATSBY_OUTPUT_DIR = args.output || `public`
+        process.env.GATSBY_OUTPUT_DIR = args.directory || `public`
         return cmd(args)
       })
     ),

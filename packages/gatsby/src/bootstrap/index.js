@@ -46,6 +46,7 @@ type BootstrapArgs = {
 }
 
 module.exports = async (args: BootstrapArgs) => {
+  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
   const program = {
     ...args,
     // Fix program directory path for windows env.
@@ -64,10 +65,10 @@ module.exports = async (args: BootstrapArgs) => {
   )
   activity.start()
   await del([
-    `${process.env.GATSBY_OUTPUT_DIR}/*.{html,css}`,
-    `${process.env.GATSBY_OUTPUT_DIR}/**/*.{html,css}`,
-    `!${process.env.GATSBY_OUTPUT_DIR}/static`,
-    `!${process.env.GATSBY_OUTPUT_DIR}/static/**/*.{html,css}`,
+    `${outputDirectory}/*.{html,css}`,
+    `${outputDirectory}/**/*.{html,css}`,
+    `!${outputDirectory}/static`,
+    `!${outputDirectory}/static/**/*.{html,css}`,
   ])
   activity.end()
 
@@ -149,7 +150,7 @@ module.exports = async (args: BootstrapArgs) => {
   initCache()
 
   // Ensure the public/static directory is created.
-  await fs.ensureDirSync(`${program.directory}/${process.env.GATSBY_OUTPUT_DIR}/static`)
+  await fs.ensureDirSync(`${program.directory}/${outputDirectory}/static`)
 
   // Copy our site files to the root of the site.
   activity = report.activityTimer(`copy gatsby files`)

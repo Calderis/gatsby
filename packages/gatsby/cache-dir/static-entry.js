@@ -52,6 +52,7 @@ module.exports = (locals, callback) => {
   let preBodyComponents = []
   let postBodyComponents = []
   let bodyProps = {}
+  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
 
   const replaceBodyHTMLString = body => {
     bodyHtml = body
@@ -139,7 +140,7 @@ module.exports = (locals, callback) => {
 
   let stats
   try {
-    stats = require(`../${process.env.GATSBY_OUTPUT_DIR}/stats.json`)
+    stats = require(`../${outputDirectory}/stats.json`)
   } catch (e) {
     // ignore
   }
@@ -184,7 +185,7 @@ module.exports = (locals, callback) => {
   })
 
   // Add the chunk-manifest at the end of body element.
-  const chunkManifest = require(`!raw!../${process.env.GATSBY_OUTPUT_DIR}/chunk-manifest.json`)
+  const chunkManifest = require(`!raw!../${outputDirectory}/chunk-manifest.json`)
   postBodyComponents.unshift(
     <script
       id="webpack-manifest"

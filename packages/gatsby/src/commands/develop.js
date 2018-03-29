@@ -44,6 +44,7 @@ rlInterface.on(`SIGINT`, () => {
 async function startServer(program) {
   const directory = program.directory
   const directoryPath = withBasePath(directory)
+  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
   const createIndexHtml = () =>
     developHtml(program).catch(err => {
       if (err.name !== `WebpackError`) {
@@ -127,7 +128,7 @@ async function startServer(program) {
     res.end()
   })
 
-  app.use(express.static(__dirname + `/${process.env.GATSBY_OUTPUT_DIR}`))
+  app.use(express.static(__dirname + `/${outputDirectory}`))
 
   app.use(
     require(`webpack-dev-middleware`)(compiler, {
@@ -151,7 +152,7 @@ async function startServer(program) {
   app.get(`*`, (req, res, next) => {
     // Load file but ignore errors.
     res.sendFile(
-      directoryPath(`/${process.env.GATSBY_OUTPUT_DIR}{decodeURIComponent(req.path)}`),
+      directoryPath(`/${outputDirectory}{decodeURIComponent(req.path)}`),
       err => {
         // No err so a file was sent successfully.
         if (!err || !err.path) {
@@ -182,7 +183,7 @@ async function startServer(program) {
       parsedPath.extname.startsWith(`.html`) ||
       parsedPath.path.endsWith(`/`)
     ) {
-      res.sendFile(directoryPath(`${process.env.GATSBY_OUTPUT_DIR}/index.html`), err => {
+      res.sendFile(directoryPath(`${outputDirectory}/index.html`), err => {
         if (err) {
           res.status(500).end()
         }

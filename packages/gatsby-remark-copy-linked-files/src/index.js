@@ -20,15 +20,16 @@ const newFileName = linkNode =>
   `${linkNode.name}-${linkNode.internal.contentDigest}.${linkNode.extension}`
 
 const newPath = (linkNode, destinationDir) => {
+  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
   if (destinationDir) {
     return path.posix.join(
       process.cwd(),
-      process.env.GATSBY_OUTPUT_DIR,
+      outputDirectory,
       destinationDir,
       newFileName(linkNode)
     )
   }
-  return path.posix.join(process.cwd(), process.env.GATSBY_OUTPUT_DIR, newFileName(linkNode))
+  return path.posix.join(process.cwd(), outputDirectory, newFileName(linkNode))
 }
 
 const newLinkURL = (linkNode, destinationDir, pathPrefix) => {

@@ -271,8 +271,9 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 }
 
 exports.onPostBuild = () => {
+  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
   fs.copySync(
     `../docs/blog/2017-02-21-1-0-progress-update-where-came-from-where-going/gatsbygram.mp4`,
-    `./${process.env.GATSBY_OUTPUT_DIR}/gatsbygram.mp4`
+    `./${outputDirectory}/gatsbygram.mp4`
   )
 }

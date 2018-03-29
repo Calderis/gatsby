@@ -40,6 +40,7 @@ module.exports = async (
   pages = []
 ) => {
   const directoryPath = withBasePath(directory)
+  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
 
   // We combine develop & develop-html stages for purposes of generating the
   // webpack config.
@@ -75,7 +76,7 @@ module.exports = async (
 
     // Don't allow overwriting of NODE_ENV, PUBLIC_DIR as to not break gatsby things
     envObject.NODE_ENV = JSON.stringify(env)
-    envObject.PUBLIC_DIR = JSON.stringify(`${process.cwd()}/${process.env.GATSBY_OUTPUT_DIR}`)
+    envObject.PUBLIC_DIR = JSON.stringify(`${process.cwd()}/${outputDirectory}`)
 
     return Object.assign(envObject, gatsbyVarObject)
   }
@@ -97,7 +98,7 @@ module.exports = async (
         // Webpack will always generate a resultant javascript file.
         // But we don't want it for this step. Deleted by build-css.js.
         return {
-          path: directoryPath(process.env.GATSBY_OUTPUT_DIR),
+          path: directoryPath(outputDirectory),
           filename: `bundle-for-css.js`,
           publicPath: program.prefixPaths
             ? `${store.getState().config.pathPrefix}/`
@@ -108,7 +109,7 @@ module.exports = async (
         // A temp file required by static-site-generator-plugin. See plugins() below.
         // Deleted by build-html.js, since it's not needed for production.
         return {
-          path: directoryPath(process.env.GATSBY_OUTPUT_DIR),
+          path: directoryPath(outputDirectory),
           filename: `render-page.js`,
           libraryTarget: `umd`,
           publicPath: program.prefixPaths
@@ -119,7 +120,7 @@ module.exports = async (
         return {
           filename: `[name]-[chunkhash].js`,
           chunkFilename: `[name]-[chunkhash].js`,
-          path: directoryPath(process.env.GATSBY_OUTPUT_DIR),
+          path: directoryPath(outputDirectory),
           publicPath: program.prefixPaths
             ? `${store.getState().config.pathPrefix}/`
             : `/`,
