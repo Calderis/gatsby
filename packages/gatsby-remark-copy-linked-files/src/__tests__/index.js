@@ -171,9 +171,9 @@ describe(`gatsby-remark-copy-linked-files`, () => {
 
   describe(`options.destinationDir`, () => {
     const imagePath = `images/sample-image.gif`
-    const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
+    const buildDirectory = process.env.GATSBY_BUILD_DIR || `public`
 
-    it(`throws an error if the destination directory is not within '${outputDirectory}'`, async () => {
+    it(`throws an error if the destination directory is not within '${buildDirectory}'`, async () => {
       const markdownAST = remark.parse(`![some absolute image](${imagePath})`)
       const invalidDestinationDir = `../destination`
       expect.assertions(2)
@@ -193,7 +193,7 @@ describe(`gatsby-remark-copy-linked-files`, () => {
       const validDestinationDir = `path/to/dir`
       const expectedNewPath = path.posix.join(
         process.cwd(),
-        outputDirectory,
+        buildDirectory,
         validDestinationDir,
         `/undefined-undefined.gif`
       )
@@ -241,7 +241,7 @@ describe(`gatsby-remark-copy-linked-files`, () => {
       const markdownAST = remark.parse(`![some absolute image](${imagePath})`)
       const expectedNewPath = path.posix.join(
         process.cwd(),
-        outputDirectory,
+        buildDirectory,
         `/undefined-undefined.gif`
       )
       expect.assertions(3)

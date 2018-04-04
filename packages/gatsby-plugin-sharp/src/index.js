@@ -304,8 +304,8 @@ function queueImageResizing({ file, args = {}, reporter }) {
   const imgSrc = `/${file.name}-${
     file.internal.contentDigest
   }-${argsDigestShort}.${fileExtension}`
-  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
-  const filePath = path.join(process.cwd(), outputDirectory, `static`, imgSrc)
+  const buildDirectory = process.env.GATSBY_BUILD_DIR || `public`
+  const filePath = path.join(process.cwd(), buildDirectory, `static`, imgSrc)
 
   // Create function to call when the image is finished.
   let outsideResolve, outsideReject

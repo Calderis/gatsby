@@ -4,8 +4,8 @@ import colors from "./utils/colors"
 let stylesStr
 if (process.env.NODE_ENV === `production`) {
   try {
-    const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
-    stylesStr = require(`!raw-loader!../${outputDirectory}/styles.css`)
+    const buildDirectory = process.env.GATSBY_BUILD_DIR || `public`
+    stylesStr = require(`!raw-loader!../${buildDirectory}/styles.css`)
   } catch (e) {
     console.log(e)
   }

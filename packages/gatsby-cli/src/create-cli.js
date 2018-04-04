@@ -112,7 +112,7 @@ function buildLocalCommands(cli, isLocalSite) {
     handler: handlerP(
       getCommandHandler(`develop`, (args, cmd) => {
         process.env.NODE_ENV = process.env.NODE_ENV || `development`
-        process.env.GATSBY_OUTPUT_DIR = args.outputDirectory || `public`
+        process.env.GATSBY_BUILD_DIR = args.buildDirectory || `public`
         cmd(args)
         // Return an empty promise to prevent handlerP from exiting early.
         // The development server shouldn't ever exit until the user directly
@@ -142,7 +142,7 @@ function buildLocalCommands(cli, isLocalSite) {
     handler: handlerP(
       getCommandHandler(`build`, (args, cmd) => {
         process.env.NODE_ENV = `production`
-        process.env.GATSBY_OUTPUT_DIR = args.outputDirectory || `public`
+        process.env.GATSBY_BUILD_DIR = args.buildDirectory || `public`
         return cmd(args)
       })
     ),

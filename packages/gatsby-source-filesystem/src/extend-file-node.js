@@ -7,13 +7,13 @@ module.exports = ({ type, getNodeAndSavePathDependency, pathPrefix = `` }) => {
     return {}
   }
 
-  const outputDirectory = process.env.GATSBY_OUTPUT_DIR || `public`
+  const buildDirectory = process.env.GATSBY_BUILD_DIR || `public`
 
   return {
     publicURL: {
       type: GraphQLString,
       args: {},
-      description: `Copy file to static directory and return ${outputDirectory} url to it`,
+      description: `Copy file to static directory and return ${buildDirectory} url to it`,
       resolve: (file, fieldArgs, context) => {
         const details = getNodeAndSavePathDependency(file.id, context.path)
         const fileName = `${file.name}-${file.internal.contentDigest}${
@@ -22,7 +22,7 @@ module.exports = ({ type, getNodeAndSavePathDependency, pathPrefix = `` }) => {
 
         const publicPath = path.join(
           process.cwd(),
-          outputDirectory,
+          buildDirectory,
           `static`,
           fileName
         )

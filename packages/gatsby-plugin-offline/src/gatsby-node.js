@@ -14,7 +14,7 @@ exports.createPages = ({ boundActionCreators }) => {
 }
 
 exports.onPostBuild = (args, pluginOptions) => {
-  const rootDir = process.env.GATSBY_OUTPUT_DIR || `public`
+  const rootDir = process.env.GATSBY_BUILD_DIR || `public`
 
   const options = {
     staticFileGlobs: [
