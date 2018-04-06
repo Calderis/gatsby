@@ -24,7 +24,7 @@ const getSslCert = require(`../utils/get-ssl-cert`)
 
 // const isInteractive = process.stdout.isTTY
 
-// Watch the static directory and copy files to output directory (default: public) as they're added or
+// Watch the static directory and copy files to build directory (default: public) as they're added or
 // changed. Wait 10 seconds so copying doesn't interfer with the regular
 // bootstrap.
 setTimeout(() => {

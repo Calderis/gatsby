@@ -27,7 +27,7 @@ exports.onPostBuild = (args, pluginOptions) => {
     ],
     stripPrefix: rootDir,
     // If `pathPrefix` is configured by user, we should replace
-    // the output directory (default: `public`) prefix with `pathPrefix`.
+    // the build directory (default: `public`) prefix with `pathPrefix`.
     // See more at:
     // https://github.com/GoogleChrome/sw-precache#replaceprefix-string
     replacePrefix: args.pathPrefix || ``,

@@ -104,10 +104,10 @@ function buildLocalCommands(cli, isLocalSite) {
           type: `boolean`,
           describe: `Use HTTPS. See https://www.gatsbyjs.org/docs/local-https/ for an initial setup guide`,
         })
-        .option(`output-dir`, {
+        .option(`build-dir`, {
           type: `string`,
           default: `public`,
-          describe: `Set output directory. Defaults to public`,
+          describe: `Set build directory. Defaults to public`,
         }),
     handler: handlerP(
       getCommandHandler(`develop`, (args, cmd) => {
@@ -134,10 +134,10 @@ function buildLocalCommands(cli, isLocalSite) {
         type: `boolean`,
         default: false,
         describe: `Build site without uglifying JS bundles (for debugging).`,
-      }).option(`output-dir`, {
+      }).option(`build-dir`, {
         type: `string`,
         default: `public`,
-        describe: `Set output directory. Defaults to public`,
+        describe: `Set build directory. Defaults to public`,
       }),
     handler: handlerP(
       getCommandHandler(`build`, (args, cmd) => {

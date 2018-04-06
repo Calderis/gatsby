@@ -22,7 +22,7 @@ module.exports = async (program: any) => {
         // ignore.
       }
 
-      // Ensure there's a styles.css file in output directory (default: public) so tools that expect it
+      // Ensure there's a styles.css file in build directory (default: public) so tools that expect it
       // can find it.
       fs.ensureFile(`${directory}/${buildDirectory}/styles.css`, err => {
         resolve(err)

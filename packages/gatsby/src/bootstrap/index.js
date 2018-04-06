@@ -58,7 +58,7 @@ module.exports = async (args: BootstrapArgs) => {
     payload: program,
   })
 
-  // Delete html and css files from the output directory (default: public) as we don't want
+  // Delete html and css files from the build directory (default: public) as we don't want
   // deleted pages and styles from previous builds to stick around.
   let activity = report.activityTimer(
     `delete html and css files from previous builds`

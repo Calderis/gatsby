@@ -25,17 +25,17 @@ module.exports = async (program: any) => {
         return reject(e)
       }
       const buildDirectory = process.env.GATSBY_BUILD_DIR || `public`
-      const outputFile = `${directory}/${buildDirectory}/render-page.js`
+      const buildFile = `${directory}/${buildDirectory}/render-page.js`
       if (stats.hasErrors()) {
         let webpackErrors = stats.toJson().errors
         return reject(
-          createErrorFromString(webpackErrors[0], `${outputFile}.map`)
+          createErrorFromString(webpackErrors[0], `${buildFile}.map`)
         )
       }
 
       // Remove the temp JS bundle file built for the static-site-generator-plugin
       try {
-        fs.unlinkSync(outputFile)
+        fs.unlinkSync(buildFile)
       } catch (e) {
         // This function will fail on Windows with no further consequences.
       }
